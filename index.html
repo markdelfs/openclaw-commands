@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Commands Reference</title>
+    <meta name="description" content="Complete OpenClaw CLI command reference. Search, copy, and learn all OpenClaw terminal commands with explanations.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script> -->
+    
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --card-hover: #222222;
+            --border: #2a2a2a;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent: #ff5a2d;
+            --accent-glow: rgba(255, 90, 45, 0.3);
+            --green: #22c55e;
+            --code-bg: #0a0a0a;
+        }
+
+        [data-theme="light"] {
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --card-hover: #f0f0f0;
+            --border: #e0e0e0;
+            --text: #1a1a1a;
+            --text-muted: #666666;
+            --accent-glow: rgba(255, 90, 45, 0.15);
+            --code-bg: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Search */
+        .search-box {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 24px;
+            padding-left: 50px;
+            font-size: 1.1rem;
+            color: var(--text);
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        /* Category Filters */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Command List */
+        .commands-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .command-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .command-card:hover {
+            border-color: var(--accent);
+        }
+
+        .command-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .command-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--code-bg);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .copy-btn {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+        }
+
+        .command-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .command-example {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--code-bg);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--green);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 300;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Help Toggle */
+        .help-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 90, 45, 0.4);
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .help-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>⌨️ OpenClaw Commands</h1>
+            <p>Complete reference for all terminal commands</p>
+        </div>
+
+        <!-- AdSense Slot 1 -->
+        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUB_ID" data-ad-slot="YOUR_AD_SLOT" data-ad-format="auto"></ins> -->
+
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search commands (e.g., message, sessions, gateway)...">
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="setup">Setup</button>
+            <button class="filter-btn" data-filter="config">Config</button>
+            <button class="filter-btn" data-filter="sessions">Sessions</button>
+            <button class="filter-btn" data-filter="gateway">Gateway</button>
+            <button class="filter-btn" data-filter="nodes">Nodes</button>
+            <button class="filter-btn" data-filter="channels">Channels</button>
+            <button class="filter-btn" data-filter="system">System</button>
+        </div>
+
+        <div class="commands-list" id="commandsList">
+            <!-- Commands will be inserted here -->
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="totalCommands">0</div>
+                <div class="stat-label">Commands</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="totalCategories">0</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+
+        <!-- AdSense Slot 2 -->
+        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUB_ID" data-ad-slot="YOUR_AD_SLOT" data-ad-format="auto"></ins> -->
+
+        <div class="disclaimer">
+            Based on OpenClaw CLI documentation. Commands may vary by version.
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <!-- AdSense Init -->
+    <!-- <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+
+    <script>
+        // OpenClaw commands database
+        const commands = [
+            { name: "openclaw setup", category: "setup", desc: "Initial setup and configuration wizard", example: "openclaw setup" },
+            { name: "openclaw onboard", category: "setup", desc: "Onboard a new device or user", example: "openclaw onboard" },
+            { name: "openclaw configure", category: "config", desc: "Configure OpenClaw settings and options", example: "openclaw configure --section web" },
+            { name: "openclaw config get", category: "config", desc: "Get a configuration value", example: "openclaw config get model" },
+            { name: "openclaw config set", category: "config", desc: "Set a configuration value", example: "openclaw config set model gpt-4" },
+            { name: "openclaw status", category: "system", desc: "Show OpenClaw status and health", example: "openclaw status" },
+            { name: "openclaw doctor", category: "system", desc: "Diagnose and fix common issues", example: "openclaw doctor" },
+            { name: "openclaw update", category: "system", desc: "Update OpenClaw to the latest version", example: "openclaw update" },
+            { name: "openclaw gateway start", category: "gateway", desc: "Start the OpenClaw gateway daemon", example: "openclaw gateway start" },
+            { name: "openclaw gateway stop", category: "gateway", desc: "Stop the OpenClaw gateway daemon", example: "openclaw gateway stop" },
+            { name: "openclaw gateway restart", category: "gateway", desc: "Restart the OpenClaw gateway daemon", example: "openclaw gateway restart" },
+            { name: "openclaw gateway status", category: "gateway", desc: "Check gateway daemon status", example: "openclaw gateway status" },
+            { name: "openclaw sessions", category: "sessions", desc: "List active sessions and sub-agents", example: "openclaw sessions" },
+            { name: "openclaw sessions list", category: "sessions", desc: "List all sessions with details", example: "openclaw sessions list --limit 10" },
+            { name: "openclaw message", category: "channels", desc: "Send messages via configured channels", example: "openclaw message send --channel telegram --target @user --message 'Hello'" },
+            { name: "openclaw nodes", category: "nodes", desc: "Manage paired node devices", example: "openclaw nodes list" },
+            { name: "openclaw node pair", category: "nodes", desc: "Pair a new node device", example: "openclaw node pair" },
+            { name: "openclaw node status", category: "nodes", desc: "Check status of a specific node", example: "openclaw node status my-node" },
+            { name: "openclaw cron", category: "system", desc: "Manage scheduled cron jobs", example: "openclaw cron list" },
+            { name: "openclaw cron add", category: "system", desc: "Add a new cron job", example: "openclaw cron add --name my-job --time '0 9 * * *' --command 'echo hi'" },
+            { name: "openclaw logs", category: "system", desc: "View and filter OpenClaw logs", example: "openclaw logs --lines 50" },
+            { name: "openclaw memory", category: "system", desc: "Manage OpenClaw memory and context", example: "openclaw memory search --query 'project ideas'" },
+            { name: "openclaw models", category: "system", desc: "List and manage available AI models", example: "openclaw models list" },
+            { name: "openclaw skills", category: "system", desc: "List and manage agent skills", example: "openclaw skills list" },
+            { name: "openclaw plugins", category: "system", desc: "Manage OpenClaw plugins", example: "openclaw plugins list" },
+            { name: "openclaw channels", category: "channels", desc: "Configure messaging channels", example: "openclaw channels list" },
+            { name: "openclaw pairing", category: "setup", desc: "Manage device pairing", example: "openclaw pairing status" },
+            { name: "openclaw qr", category: "setup", desc: "Generate QR code for pairing", example: "openclaw qr" },
+            { name: "openclaw browser", category: "system", desc: "Control browser automation", example: "openclaw browser snapshot" },
+            { name: "openclaw health", category: "system", desc: "Run health checks on the system", example: "openclaw health" },
+            { name: "openclaw system", category: "system", desc: "System information and diagnostics", example: "openclaw system info" },
+            { name: "openclaw docs", category: "system", desc: "OpenClaw documentation browser", example: "openclaw docs" },
+            { name: "openclaw reset", category: "system", desc: "Reset OpenClaw to defaults", example: "openclaw reset --confirm" },
+            { name: "openclaw uninstall", category: "system", desc: "Uninstall OpenClaw completely", example: "openclaw uninstall" },
+            { name: "openclaw tui", category: "system", desc: "Launch terminal UI", example: "openclaw tui" },
+            { name: "openclaw dashboard", category: "system", desc: "Open web dashboard", example: "openclaw dashboard" },
+            { name: "openclaw security audit", category: "system", desc: "Run security audit", example: "openclaw security audit" },
+            { name: "openclaw webhooks", category: "channels", desc: "Manage webhooks", example: "openclaw webhooks list" },
+            { name: "openclaw hooks", category: "system", desc: "Manage automation hooks", example: "openclaw hooks list" },
+            { name: "openclaw dns", category: "system", desc: "DNS management tools", example: "openclaw dns status" },
+            { name: "openclaw completion", category: "config", desc: "Generate shell completion scripts", example: "openclaw completion zsh" },
+            { name: "openclaw agents", category: "sessions", desc: "Manage agent configurations", example: "openclaw agents list" },
+            { name: "openclaw agent", category: "sessions", desc: "Control specific agent sessions", example: "openclaw agent status" },
+            { name: "openclaw acp", category: "sessions", desc: "Agent Communication Protocol commands", example: "openclaw acp list" },
+            { name: "openclaw directory", category: "channels", desc: "Manage contact directories", example: "openclaw directory list" },
+            { name: "openclaw devices", category: "nodes", desc: "Manage connected devices", example: "openclaw devices list" },
+            { name: "openclaw approvals", category: "system", desc: "Manage approval workflows", example: "openclaw approvals list" },
+            { name: "openclaw sandbox", category: "system", desc: "Sandbox environment management", example: "openclaw sandbox status" },
+        ];
+
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.querySelector('.theme-toggle');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                btn.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                btn.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        (function() {
+            const saved = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.querySelector('.theme-toggle').textContent = saved === 'light' ? '☀️' : '🌙';
+        })();
+
+        // Render commands
+        function renderCommands(filter = 'all', search = '') {
+            const list = document.getElementById('commandsList');
+            let filtered = commands;
+
+            // Filter by category
+            if (filter !== 'all') {
+                filtered = filtered.filter(c => c.category === filter);
+            }
+
+            // Filter by search
+            if (search) {
+                const q = search.toLowerCase();
+                filtered = filtered.filter(c => 
+                    c.name.toLowerCase().includes(q) || 
+                    c.desc.toLowerCase().includes(q)
+                );
+            }
+
+            if (filtered.length === 0) {
+                list.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <p>No commands found</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = filtered.map(cmd => `
+                <div class="command-card">
+                    <div class="command-header">
+                        <span class="command-name">${cmd.name}</span>
+                        <button class="copy-btn" onclick="copyCommand('${cmd.name}')">📋 Copy</button>
+                    </div>
+                    <div class="command-desc">${cmd.desc}</div>
+                    <div class="command-example">$ ${cmd.example}</div>
+                </div>
+            `).join('');
+
+            // Update stats
+            document.getElementById('totalCommands').textContent = commands.length;
+            document.getElementById('totalCategories').textContent = [...new Set(commands.map(c => c.category))].length;
+        }
+
+        // Copy to clipboard
+        async function copyCommand(cmd) {
+            try {
+                await navigator.clipboard.writeText(cmd);
+                showToast();
+                
+                // Update button state
+                const btns = document.querySelectorAll('.copy-btn');
+                btns.forEach(btn => {
+                    if (btn.onclick.toString().includes(cmd)) {
+                        btn.textContent = '✅ Copied!';
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = '📋 Copy';
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            renderCommands(activeFilter, e.target.value);
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderCommands(btn.dataset.filter, document.getElementById('searchInput').value);
+            });
+        });
+
+        // Initial render
+        renderCommands();
+    </script>
+</body>
+</html>
