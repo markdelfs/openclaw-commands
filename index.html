@@ -7,9 +7,6 @@
     <meta name="description" content="Complete OpenClaw CLI command reference. Search, copy, and learn all OpenClaw terminal commands with explanations.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Google AdSense -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script> -->
-    
     <style>
         :root {
             --bg: #0f0f0f;
@@ -35,308 +32,52 @@
             --code-bg: #f0f0f0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            transition: all 0.2s ease;
-            z-index: 100;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            color: var(--accent);
-        }
-
-        .header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Search */
-        .search-box {
-            position: relative;
-            margin-bottom: 32px;
-        }
-
-        .search-input {
-            width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px 24px;
-            padding-left: 50px;
-            font-size: 1.1rem;
-            color: var(--text);
-            transition: all 0.2s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.25rem;
-            color: var(--text-muted);
-        }
-
-        /* Category Filters */
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
-        .filter-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .filter-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
-
-        /* Command List */
-        .commands-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .command-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.2s ease;
-        }
-
-        .command-card:hover {
-            border-color: var(--accent);
-        }
-
-        .command-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 8px;
-        }
-
-        .command-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--accent);
-            background: var(--code-bg);
-            padding: 6px 12px;
-            border-radius: 6px;
-        }
-
-        .copy-btn {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .copy-btn:hover {
-            border-color: var(--green);
-            color: var(--green);
-        }
-
-        .copy-btn.copied {
-            background: var(--green);
-            border-color: var(--green);
-            color: white;
-        }
-
-        .command-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .command-example {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            background: var(--code-bg);
-            padding: 8px 12px;
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-muted);
-        }
-
-        .no-results-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
-        }
-
-        /* Stats */
-        .stats {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .disclaimer {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--green);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 300;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        /* Help Toggle */
-        .help-toggle {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            box-shadow: 0 4px 20px rgba(255, 90, 45, 0.4);
-            transition: all 0.2s ease;
-            z-index: 100;
-        }
-
-        .help-toggle:hover {
-            transform: scale(1.1);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 40px 20px; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .theme-toggle { position: fixed; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s ease; z-index: 100; }
+        .theme-toggle:hover { border-color: var(--accent); }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; color: var(--accent); }
+        .header p { color: var(--text-muted); font-size: 1rem; }
+        .search-box { position: relative; margin-bottom: 32px; }
+        .search-input { width: 100%; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 24px; padding-left: 50px; font-size: 1.1rem; color: var(--text); }
+        .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 1.25rem; color: var(--text-muted); }
+        .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 8px 16px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .commands-list { display: flex; flex-direction: column; gap: 12px; }
+        .command-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.2s ease; }
+        .command-card:hover { border-color: var(--accent); }
+        .command-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+        .command-name { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 600; color: var(--accent); background: var(--code-bg); padding: 6px 12px; border-radius: 6px; }
+        .copy-btn { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+        .copy-btn:hover { border-color: var(--green); color: var(--green); }
+        .copy-btn.copied { background: var(--green); border-color: var(--green); color: white; }
+        .command-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; }
+        .command-details { font-size: 0.85rem; color: var(--text-muted); background: var(--code-bg); padding: 12px; border-radius: 8px; margin-top: 10px; border-left: 3px solid var(--accent); }
+        .command-subtitle { font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .command-example { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); background: var(--code-bg); padding: 8px 12px; border-radius: 6px; display: inline-block; }
+        .no-results { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+        .stats { display: flex; gap: 20px; justify-content: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); }
+        .disclaimer { text-align: center; margin-top: 32px; font-size: 0.75rem; color: var(--text-muted); }
+        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--green); color: white; padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; opacity: 0; transition: all 0.3s ease; z-index: 300; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
     <div class="container">
         <div class="header">
             <h1>⌨️ OpenClaw Commands</h1>
             <p>Complete reference for all terminal commands</p>
         </div>
-
-        <!-- AdSense Slot 1 -->
-        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUB_ID" data-ad-slot="YOUR_AD_SLOT" data-ad-format="auto"></ins> -->
 
         <div class="search-box">
             <span class="search-icon">🔍</span>
@@ -354,9 +95,7 @@
             <button class="filter-btn" data-filter="system">System</button>
         </div>
 
-        <div class="commands-list" id="commandsList">
-            <!-- Commands will be inserted here -->
-        </div>
+        <div class="commands-list" id="commandsList"></div>
 
         <div class="stats">
             <div class="stat">
@@ -369,79 +108,82 @@
             </div>
         </div>
 
-        <!-- AdSense Slot 2 -->
-        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUB_ID" data-ad-slot="YOUR_AD_SLOT" data-ad-format="auto"></ins> -->
-
         <div class="disclaimer">
             Based on OpenClaw CLI documentation. Commands may vary by version.
         </div>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast">Copied to clipboard!</div>
 
-    <!-- AdSense Init -->
-    <!-- <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
-
     <script>
-        // OpenClaw commands database
         const commands = [
-            { name: "openclaw setup", category: "setup", desc: "Initial setup and configuration wizard", example: "openclaw setup" },
-            { name: "openclaw onboard", category: "setup", desc: "Onboard a new device or user", example: "openclaw onboard" },
-            { name: "openclaw configure", category: "config", desc: "Configure OpenClaw settings and options", example: "openclaw configure --section web" },
-            { name: "openclaw config get", category: "config", desc: "Get a configuration value", example: "openclaw config get model" },
-            { name: "openclaw config set", category: "config", desc: "Set a configuration value", example: "openclaw config set model gpt-4" },
-            { name: "openclaw status", category: "system", desc: "Show OpenClaw status and health", example: "openclaw status" },
-            { name: "openclaw doctor", category: "system", desc: "Diagnose and fix common issues", example: "openclaw doctor" },
-            { name: "openclaw update", category: "system", desc: "Update OpenClaw to the latest version", example: "openclaw update" },
-            { name: "openclaw gateway start", category: "gateway", desc: "Start the OpenClaw gateway daemon", example: "openclaw gateway start" },
-            { name: "openclaw gateway stop", category: "gateway", desc: "Stop the OpenClaw gateway daemon", example: "openclaw gateway stop" },
-            { name: "openclaw gateway restart", category: "gateway", desc: "Restart the OpenClaw gateway daemon", example: "openclaw gateway restart" },
-            { name: "openclaw gateway status", category: "gateway", desc: "Check gateway daemon status", example: "openclaw gateway status" },
-            { name: "openclaw sessions", category: "sessions", desc: "List active sessions and sub-agents", example: "openclaw sessions" },
-            { name: "openclaw sessions list", category: "sessions", desc: "List all sessions with details", example: "openclaw sessions list --limit 10" },
-            { name: "openclaw message", category: "channels", desc: "Send messages via configured channels", example: "openclaw message send --channel telegram --target @user --message 'Hello'" },
-            { name: "openclaw nodes", category: "nodes", desc: "Manage paired node devices", example: "openclaw nodes list" },
-            { name: "openclaw node pair", category: "nodes", desc: "Pair a new node device", example: "openclaw node pair" },
-            { name: "openclaw node status", category: "nodes", desc: "Check status of a specific node", example: "openclaw node status my-node" },
-            { name: "openclaw cron", category: "system", desc: "Manage scheduled cron jobs", example: "openclaw cron list" },
-            { name: "openclaw cron add", category: "system", desc: "Add a new cron job", example: "openclaw cron add --name my-job --time '0 9 * * *' --command 'echo hi'" },
-            { name: "openclaw logs", category: "system", desc: "View and filter OpenClaw logs", example: "openclaw logs --lines 50" },
-            { name: "openclaw memory", category: "system", desc: "Manage OpenClaw memory and context", example: "openclaw memory search --query 'project ideas'" },
-            { name: "openclaw models", category: "system", desc: "List and manage available AI models", example: "openclaw models list" },
-            { name: "openclaw skills", category: "system", desc: "List and manage agent skills", example: "openclaw skills list" },
-            { name: "openclaw plugins", category: "system", desc: "Manage OpenClaw plugins", example: "openclaw plugins list" },
-            { name: "openclaw channels", category: "channels", desc: "Configure messaging channels", example: "openclaw channels list" },
-            { name: "openclaw pairing", category: "setup", desc: "Manage device pairing", example: "openclaw pairing status" },
-            { name: "openclaw qr", category: "setup", desc: "Generate QR code for pairing", example: "openclaw qr" },
-            { name: "openclaw browser", category: "system", desc: "Control browser automation", example: "openclaw browser snapshot" },
-            { name: "openclaw health", category: "system", desc: "Run health checks on the system", example: "openclaw health" },
-            { name: "openclaw system", category: "system", desc: "System information and diagnostics", example: "openclaw system info" },
-            { name: "openclaw docs", category: "system", desc: "OpenClaw documentation browser", example: "openclaw docs" },
-            { name: "openclaw reset", category: "system", desc: "Reset OpenClaw to defaults", example: "openclaw reset --confirm" },
-            { name: "openclaw uninstall", category: "system", desc: "Uninstall OpenClaw completely", example: "openclaw uninstall" },
-            { name: "openclaw tui", category: "system", desc: "Launch terminal UI", example: "openclaw tui" },
-            { name: "openclaw dashboard", category: "system", desc: "Open web dashboard", example: "openclaw dashboard" },
-            { name: "openclaw security audit", category: "system", desc: "Run security audit", example: "openclaw security audit" },
-            { name: "openclaw webhooks", category: "channels", desc: "Manage webhooks", example: "openclaw webhooks list" },
-            { name: "openclaw hooks", category: "system", desc: "Manage automation hooks", example: "openclaw hooks list" },
-            { name: "openclaw dns", category: "system", desc: "DNS management tools", example: "openclaw dns status" },
-            { name: "openclaw completion", category: "config", desc: "Generate shell completion scripts", example: "openclaw completion zsh" },
-            { name: "openclaw agents", category: "sessions", desc: "Manage agent configurations", example: "openclaw agents list" },
-            { name: "openclaw agent", category: "sessions", desc: "Control specific agent sessions", example: "openclaw agent status" },
-            { name: "openclaw acp", category: "sessions", desc: "Agent Communication Protocol commands", example: "openclaw acp list" },
-            { name: "openclaw directory", category: "channels", desc: "Manage contact directories", example: "openclaw directory list" },
-            { name: "openclaw devices", category: "nodes", desc: "Manage connected devices", example: "openclaw devices list" },
-            { name: "openclaw approvals", category: "system", desc: "Manage approval workflows", example: "openclaw approvals list" },
-            { name: "openclaw sandbox", category: "system", desc: "Sandbox environment management", example: "openclaw sandbox status" },
-            { name: "ollama launch openclaw", category: "system", desc: "Launch OpenClaw with Ollama integration", example: "ollama launch openclaw" },
+            // SETUP
+            { name: "openclaw setup", category: "setup", desc: "Run the initial setup wizard to configure OpenClaw", details: "Walks through first-time configuration including model selection, channel setup (Telegram, Discord, etc.), and workspace initialization. Creates the ~/.openclaw directory structure and generates your initial config file.", example: "openclaw setup" },
+            { name: "openclaw onboard", category: "setup", desc: "Onboard a new device or invite a user", details: "Generates pairing tokens or QR codes to connect new devices to your OpenClaw instance. Useful for adding phones, tablets, or secondary machines to your agent network.", example: "openclaw onboard" },
+            { name: "openclaw pairing", category: "setup", desc: "View and manage device pairing status", details: "Shows currently paired devices, their connection status, and when they were last seen. Use this to troubleshoot connection issues or remove old devices.", example: "openclaw pairing status" },
+            { name: "openclaw qr", category: "setup", desc: "Generate a QR code for device pairing", details: "Creates a scannable QR code that encodes your OpenClaw instance connection details. Scan this with a mobile device to pair it automatically without manual token entry.", example: "openclaw qr" },
+
+            // CONFIG
+            { name: "openclaw configure", category: "config", desc: "Launch interactive configuration editor", details: "Opens a TUI or prompts to edit OpenClaw settings. Use --section to target specific areas like 'web', 'channels', 'models', etc. Changes are saved to openclaw.json.", example: "openclaw configure --section web" },
+            { name: "openclaw config get", category: "config", desc: "Retrieve a specific configuration value", details: "Reads and displays a value from your config file. Supports dot notation for nested values like 'channels.telegram.enabled' or 'models.default'.", example: "openclaw config get model" },
+            { name: "openclaw config set", category: "config", desc: "Update a configuration value", details: "Sets a config value and saves it to openclaw.json. Supports strings, numbers, booleans, and arrays. Use --json flag for complex values.", example: "openclaw config set model gpt-4" },
+            { name: "openclaw completion", category: "config", desc: "Generate shell autocomplete scripts", details: "Outputs shell completion scripts for bash, zsh, or fish. Pipe this to your shell's completions directory to get tab-completion for all OpenClaw commands.", example: "openclaw completion zsh" },
+
+            // GATEWAY
+            { name: "openclaw gateway start", category: "gateway", desc: "Start the OpenClaw background process", details: "Launches the Gateway daemon that manages all OpenClaw operations. This runs persistently in the background, handling heartbeats, cron jobs, and message processing.", example: "openclaw gateway start" },
+            { name: "openclaw gateway stop", category: "gateway", desc: "Stop the OpenClaw background process", details: "Gracefully shuts down the Gateway daemon. All active sessions will be terminated and scheduled jobs will pause until restarted.", example: "openclaw gateway stop" },
+            { name: "openclaw gateway restart", category: "gateway", desc: "Restart the Gateway daemon", details: "Stops and immediately restarts the Gateway. Useful after config changes that require a restart to take effect, or to clear memory issues.", example: "openclaw gateway restart" },
+            { name: "openclaw gateway status", category: "gateway", desc: "Check if Gateway is running", details: "Shows whether the Gateway daemon is active, how long it's been running, memory usage, and active session count. Critical for debugging connection issues.", example: "openclaw gateway status" },
+
+            // SESSIONS
+            { name: "openclaw sessions", category: "sessions", desc: "List all active sessions", details: "Shows running agent sessions, their status, model being used, and how long they've been active. Includes sub-agents spawned for specific tasks.", example: "openclaw sessions" },
+            { name: "openclaw sessions list", category: "sessions", desc: "Detailed session listing with filters", details: "Extended view showing session metadata, last activity, token usage, and connected channels. Use --limit to control output size.", example: "openclaw sessions list --limit 10" },
+            { name: "openclaw agents", category: "sessions", desc: "Manage agent configurations", details: "Lists configured agents (main, coding sub-agents, etc.) and their models. Use to add/remove agent definitions without starting sessions.", example: "openclaw agents list" },
+            { name: "openclaw agent", category: "sessions", desc: "Control a specific agent session", details: "Target a named agent to check status, send messages, or terminate. Used primarily for sub-agent orchestration and debugging.", example: "openclaw agent status" },
+            { name: "openclaw acp", category: "sessions", desc: "Agent Communication Protocol commands", details: "Interfaces with ACP harness agents (like Codex, Claude Code). Lists available harnesses and manages ACP-specific session controls.", example: "openclaw acp list" },
+
+            // NODES
+            { name: "openclaw nodes", category: "nodes", desc: "List paired node devices", details: "Shows all devices paired to your OpenClaw instance (phones, computers, IoT devices). Includes connection status and last seen timestamps.", example: "openclaw nodes list" },
+            { name: "openclaw node pair", category: "nodes", desc: "Pair a new device", details: "Initiates the pairing handshake for a new node. Generates tokens or displays QR codes for the new device to scan.", example: "openclaw node pair" },
+            { name: "openclaw node status", category: "nodes", desc: "Check specific node status", details: "Deep dive into a single node's status: connection health, battery (if mobile), supported capabilities, and active sessions on that device.", example: "openclaw node status my-node" },
+            { name: "openclaw devices", category: "nodes", desc: "Manage device connections", details: "Alias for nodes commands with additional device-specific operations like screen recording, camera access, or remote command execution.", example: "openclaw devices list" },
+
+            // CHANNELS
+            { name: "openclaw message", category: "channels", desc: "Send messages through configured channels", details: "Routes messages through enabled channels (Telegram, Discord, Signal, etc.). Supports attachments, reactions, and reply threading.", example: "openclaw message send --channel telegram --target @user --message 'Hello'" },
+            { name: "openclaw channels", category: "channels", desc: "Configure messaging channels", details: "Lists enabled channels and their status. Use to add/remove channel integrations or test connectivity.", example: "openclaw channels list" },
+            { name: "openclaw webhooks", category: "channels", desc: "Manage webhook endpoints", details: "View and configure webhook URLs for external integrations. OpenClaw can receive webhooks to trigger commands programmatically.", example: "openclaw webhooks list" },
+            { name: "openclaw directory", category: "channels", desc: "Manage contact directory", details: "Organize contacts by platform (Telegram usernames, Discord IDs, etc.) for easier targeting in message commands.", example: "openclaw directory list" },
+
+            // SYSTEM
+            { name: "openclaw status", category: "system", desc: "Show overall OpenClaw health", details: "Dashboard view of system status: Gateway running, active sessions, connected channels, memory usage, and recent errors.", example: "openclaw status" },
+            { name: "openclaw doctor", category: "system", desc: "Diagnose and fix issues", details: "Runs a suite of checks on config, permissions, dependencies, and connectivity. Reports issues and can attempt automatic fixes with --fix flag.", example: "openclaw doctor" },
+            { name: "openclaw update", category: "system", desc: "Update OpenClaw to latest version", details: "Checks for newer versions and performs an in-place upgrade. Preserves config and restarts Gateway if running.", example: "openclaw update" },
+            { name: "openclaw cron", category: "system", desc: "Manage scheduled tasks", details: "List, add, or remove cron jobs that run OpenClaw commands on schedules. Useful for heartbeats, daily briefings, or periodic checks.", example: "openclaw cron list" },
+            { name: "openclaw cron add", category: "system", desc: "Add a scheduled task", details: "Creates a new cron entry. Specify name, cron expression (e.g., '0 9 * * *'), and the command to run. Optionally set timezone.", example: "openclaw cron add --name my-job --time '0 9 * * *' --command 'echo hi'" },
+            { name: "openclaw logs", category: "system", desc: "View OpenClaw logs", details: "Tails or searches Gateway and session logs. Use --lines for tail, --grep for filtering, or --follow for real-time streaming.", example: "openclaw logs --lines 50" },
+            { name: "openclaw memory", category: "system", desc: "Manage memory system", details: "Interface with Mem0 integration: search long-term memory, add new memories, or purge outdated entries. Context from these memories surfaces in conversations.", example: "openclaw memory search --query 'project ideas'" },
+            { name: "openclaw models", category: "system", desc: "List available AI models", details: "Shows configured models and their providers (OpenAI, Anthropic, Ollama, etc.). Test connectivity and view context window sizes.", example: "openclaw models list" },
+            { name: "openclaw skills", category: "system", desc: "Manage skill packages", details: "Lists installed skills and their versions. Skills extend OpenClaw with new tools (GitHub, weather, PDF editing, etc.).", example: "openclaw skills list" },
+            { name: "openclaw plugins", category: "system", desc: "Manage plugins", details: "Low-level plugin management for extending OpenClaw's core capabilities beyond the skill system.", example: "openclaw plugins list" },
+            { name: "openclaw browser", category: "system", desc: "Control browser automation", details: "Launch, control, and capture from browser instances. Used for web scraping, screenshots, and UI automation tasks.", example: "openclaw browser snapshot" },
+            { name: "openclaw health", category: "system", desc: "Run system health checks", details: "Quick health check focusing on external service connectivity (APIs, channels, databases) rather than config issues.", example: "openclaw health" },
+            { name: "openclaw system", category: "system", desc: "View system information", details: "Display version, platform, Python version, installed dependencies, and environment details for debugging.", example: "openclaw system info" },
+            { name: "openclaw docs", category: "system", desc: "Open documentation", details: "Launches local documentation in browser or outputs CLI help for specific commands.", example: "openclaw docs" },
+            { name: "openclaw security audit", category: "system", desc: "Run security audit", details: "Checks file permissions, config for secrets exposure, and network settings. Provides hardening recommendations.", example: "openclaw security audit" },
+            { name: "openclaw hooks", category: "system", desc: "Manage automation hooks", details: "Configure event-driven hooks that trigger commands when specific events occur (file changes, webhooks, etc.).", example: "openclaw hooks list" },
+            { name: "openclaw dns", category: "system", desc: "DNS management tools", details: "View and configure DNS settings, helpful for webhook endpoints or custom domain setups.", example: "openclaw dns status" },
+            { name: "openclaw approvals", category: "system", desc: "Manage approval workflows", details: "Review and approve/deny pending actions that require human confirmation (set in config for sensitive operations).", example: "openclaw approvals list" },
+            { name: "openclaw sandbox", category: "system", desc: "Manage sandbox environments", details: "Create isolated execution environments for testing commands or running untrusted code safely.", example: "openclaw sandbox status" },
+            { name: "openclaw tui", category: "system", desc: "Launch terminal UI", details: "Opens an interactive terminal interface for managing OpenClaw without typing commands.", example: "openclaw tui" },
+            { name: "openclaw dashboard", category: "system", desc: "Open web dashboard", details: "Launches a local web dashboard for visual management of sessions, channels, and configuration.", example: "openclaw dashboard" },
+            { name: "openclaw reset", category: "system", desc: "Reset to defaults", details: "WARNING: Resets all configuration to defaults. Use --confirm or --soft for partial resets. Backup your config first.", example: "openclaw reset --confirm" },
+            { name: "openclaw uninstall", category: "system", desc: "Remove OpenClaw completely", details: "Uninstalls OpenClaw and optionally removes all data, configs, and memories. Requires confirmation.", example: "openclaw uninstall" },
+            { name: "ollama launch openclaw", category: "system", desc: "Launch OpenClaw with Ollama models", details: "Starts OpenClaw configured to use local Ollama-hosted models instead of cloud providers. Useful for offline/privacy-focused operation.", example: "ollama launch openclaw" },
         ];
 
-        // Theme toggle
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.querySelector('.theme-toggle');
-            
             if (html.getAttribute('data-theme') === 'light') {
                 html.setAttribute('data-theme', 'dark');
                 btn.textContent = '🌙';
@@ -453,42 +195,24 @@
             }
         }
 
-        // Load saved theme
         (function() {
             const saved = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', saved);
             document.querySelector('.theme-toggle').textContent = saved === 'light' ? '☀️' : '🌙';
         })();
 
-        // Render commands
         function renderCommands(filter = 'all', search = '') {
             const list = document.getElementById('commandsList');
             let filtered = commands;
-
-            // Filter by category
-            if (filter !== 'all') {
-                filtered = filtered.filter(c => c.category === filter);
-            }
-
-            // Filter by search
+            if (filter !== 'all') filtered = filtered.filter(c => c.category === filter);
             if (search) {
                 const q = search.toLowerCase();
-                filtered = filtered.filter(c => 
-                    c.name.toLowerCase().includes(q) || 
-                    c.desc.toLowerCase().includes(q)
-                );
+                filtered = filtered.filter(c => c.name.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || (c.details && c.details.toLowerCase().includes(q)));
             }
-
             if (filtered.length === 0) {
-                list.innerHTML = `
-                    <div class="no-results">
-                        <div class="no-results-icon">🔍</div>
-                        <p>No commands found</p>
-                    </div>
-                `;
+                list.innerHTML = '<div class="no-results"><div style="font-size:3rem;margin-bottom:16px">🔍</div><p>No commands found</p></div>';
                 return;
             }
-
             list.innerHTML = filtered.map(cmd => `
                 <div class="command-card">
                     <div class="command-header">
@@ -497,35 +221,24 @@
                     </div>
                     <div class="command-desc">${cmd.desc}</div>
                     <div class="command-example">$ ${cmd.example}</div>
+                    ${cmd.details ? `<div class="command-details"><div class="command-subtitle">What it does:</div>${cmd.details}</div>` : ''}
                 </div>
             `).join('');
-
-            // Update stats
             document.getElementById('totalCommands').textContent = commands.length;
             document.getElementById('totalCategories').textContent = [...new Set(commands.map(c => c.category))].length;
         }
 
-        // Copy to clipboard
         async function copyCommand(cmd) {
-            try {
-                await navigator.clipboard.writeText(cmd);
-                showToast();
-                
-                // Update button state
-                const btns = document.querySelectorAll('.copy-btn');
-                btns.forEach(btn => {
-                    if (btn.onclick.toString().includes(cmd)) {
-                        btn.textContent = '✅ Copied!';
-                        btn.classList.add('copied');
-                        setTimeout(() => {
-                            btn.textContent = '📋 Copy';
-                            btn.classList.remove('copied');
-                        }, 2000);
-                    }
-                });
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
+            await navigator.clipboard.writeText(cmd);
+            showToast();
+            const btns = document.querySelectorAll('.copy-btn');
+            btns.forEach(btn => {
+                if (btn.onclick.toString().includes(cmd)) {
+                    btn.textContent = '✅ Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
+                }
+            });
         }
 
         function showToast() {
@@ -534,7 +247,6 @@
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        // Event listeners
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
             renderCommands(activeFilter, e.target.value);
@@ -548,7 +260,6 @@
             });
         });
 
-        // Initial render
         renderCommands();
     </script>
 </body>
